@@ -1,5 +1,9 @@
 <script lang="ts">
+import axios from "axios";
+import config from "../config";
+
 import "../assets/forms.css"
+
 
 export default {
   name: "apply",
@@ -7,12 +11,24 @@ export default {
     return {
       email: "",
       provider: "",
-      teamname: ""
+      team: ""
     }
   },
   methods: {
-    apply() {
+    async apply() {
+      
+      const response = await axios.post(config.backendUrl+"/apply", {
+        email: this.email,
+        provider: this.provider,
+        team: this.team
+      })
 
+
+      //Clear up inputs. Send notification.
+      this.email = "";
+      this.provider = "";
+      this.team = "";
+      this.$toast.success("Din ansøgning er blevet sendt!");
     }
   }
 }
@@ -40,7 +56,7 @@ export default {
 
             <div class="form-group">
                 <label for="password">Team:</label>
-                <input type="text" id="teamname" v-model="teamname" placeholder="YKCS0" required>
+                <input type="text" id="teamname" v-model="team" placeholder="YKCS0" required>
             </div>
             
             <button type="submit">Ansøg</button>
