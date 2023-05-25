@@ -21,3 +21,17 @@ input {
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 4px thin #db4d34;
+    border-top: 4px solid #db4d34;
+    animation: spin 0.5s linear infinite;
+  }
+  
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}

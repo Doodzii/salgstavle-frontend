@@ -27,28 +27,43 @@ form > div {
 form > div > label {
     display: block;
     color: #393939; /* Light red text */
-    font-size: 20px;
+    font-size: 19px;
     margin-bottom: 5px;
 }
-
+form > div > textarea,
 form > div > input {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #9a9a9a; /* Light red border */
-    background-color: #FFFFFF; /* White background */
+    border: 0px solid #9a9a9a; /* Light red border */
+    border-bottom: 2px solid rgb(154, 154, 154);
+    background-color: #faf9f9; /* White background */
     color: #2a2a2a; /* Light red text */
     font-size: 16px;
+    resize: none;
+    outline: none;
 }
 
-from > div > input::placeholder {
-    color: #c8aeae;
+form > div > textarea {
+    height: 100px;
+}
+
+form > div > textarea::placeholder,
+form > div > input::placeholder {
+    color: #adadad;
+    font-style: italic;
+}
+
+form > div > textarea:focus,
+form > div > input:focus {
+    border: 0px solid #9a9a9a;
+    border-bottom: 2px solid rgb(47, 47, 47);
 }
 
 form > button[type="submit"] {
     padding: 10px 20px;
-    background-color: #FF5555; /* Light red background */
-    color: #FFFFFF; /* White text */
+    background-color: #FF5555;
+    color: #FFFFFF;
     border-radius: 5px;
     border: none;
     font-size: 16px;

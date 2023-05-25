@@ -2,8 +2,7 @@
 import axios from "axios";
 import config from "../config";
 
-import "../assets/forms.css"
-
+import "../assets/forms.css";
 
 export default {
   name: "apply",
@@ -11,7 +10,9 @@ export default {
     return {
       email: "",
       provider: "",
-      team: ""
+      team: "",
+      reason: "",
+      sent: false
     }
   },
   methods: {
@@ -20,11 +21,12 @@ export default {
       const response = await axios.post(config.backendUrl+"/apply", {
         email: this.email,
         provider: this.provider,
-        team: this.team
+        team: this.team,
       })
       
       if (response.data.success) {
         this.$toast.success(response.data.success);
+        this.sent = true;
       }
 
       if (response.data.error) {
@@ -32,19 +34,22 @@ export default {
       }
 
       //Clear up inputs. Send notification.
-      if (response.data.clear) {
+      /*if (response.data.clear) {
         this.email = "";
         this.provider = "";
         this.team = "";
       }
-      
+      */
     }
   }
 }
 </script>
 
 <template>
-    <div class="apply form-container">
+    <!-- 
+      Application form
+    -->
+    <div v-if="!sent" class="apply form-container">
 
         <h1>🎯 Ansøgningsformular - Leder Adgang</h1>
 
@@ -59,19 +64,37 @@ export default {
             </div>
  
             <div class="form-group">
-                <label for="password">Udbyder:</label>
+                <label for="text">Udbyder:</label>
                 <input type="text" id="provider" v-model="provider" placeholder="YouSee" required>
             </div>
 
             <div class="form-group">
-                <label for="password">Team:</label>
+                <label for="text">Team:</label>
                 <input type="text" id="teamname" v-model="team" placeholder="YKCS0" required>
             </div>
             
+            <div class="form-group">
+                <label for="text">Venligst uddyb årsagen til, hvorfor du søger adgang:</label>
+                <!-- <input type="text" id="reason" v-model="reason" placeholder="Så jeg kan motivere mit team til at sælge nødpakker!" required>-->
+                <textarea id="reason" name="reason" placeholder="Så jeg kan motivere mit team til at sælge nødpakker!" required></textarea>
+            
+            </div>
+
+  
             <button type="submit">Ansøg</button>
             <a style="margin-left: 10px;" href="/login">Gå til login</a>
         </form>
     </div>
+    
+    <!--
+      Application sent. Check email inbox.
+    -->
+    <div v-if="sent" class="apply form-container">
+      <h1>Godkend din email</h1>
+      <p>Følg instruktionerne sendt til din mailadresse på <b>{{ email }}</b>.</p>
+      <a style="margin-left: 10px;" href="/login">Gå til login</a>
+    </div>
+
 </template>
 
 <style>
