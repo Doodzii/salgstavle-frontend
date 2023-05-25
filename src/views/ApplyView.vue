@@ -22,13 +22,22 @@ export default {
         provider: this.provider,
         team: this.team
       })
+      
+      if (response.data.success) {
+        this.$toast.success(response.data.success);
+      }
 
+      if (response.data.error) {
+        this.$toast.error(response.data.error);
+      }
 
       //Clear up inputs. Send notification.
-      this.email = "";
-      this.provider = "";
-      this.team = "";
-      this.$toast.success("Din ansøgning er blevet sendt!");
+      if (response.data.clear) {
+        this.email = "";
+        this.provider = "";
+        this.team = "";
+      }
+      
     }
   }
 }
