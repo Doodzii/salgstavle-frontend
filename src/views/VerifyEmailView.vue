@@ -1,7 +1,6 @@
 <script lang="ts">
 import axios from "axios";
 import config from "../config";
-import { runInThisContext } from "vm";
 
 export default {
   name: "verify",

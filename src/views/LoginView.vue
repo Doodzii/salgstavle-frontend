@@ -1,20 +1,37 @@
 
 <script lang="ts">
+import axios from "axios";
+import config from "../config";
 
 export default {
   name: "login",
+  
   data() {
     return {
       username: "",
       password: ""
     }
   },
+
   methods: {
-    login() {
-      console.log(this.username);
-      console.log(this.password);
+    async login() {
+
+      const response = await axios.post(config.backendUrl+"/login", {
+        username: this.username,
+        password: this.password
+      })
+
+      if (response.data.success) {
+        this.$toast.success(response.data.success);
+      }
+
+      if (response.data.error) {
+        this.$toast.error(response.data.error);
+      }
+      
     }
   }
+
 }
 
 </script>
@@ -26,13 +43,13 @@ export default {
       <h1>🎯 Log ind</h1>
 
       <p>Vær opmærksom på, at dit login ikke er det samme som dit normale koncernlogin.</p>
-
+      <p>Hvis du ikke kender dine loginoplysninger, bedes du kontakte din leder for hjælp.</p>
       <div class="form-group">
-        <label for="username">Brugernavn:</label>
-        <input type="text" id="username" v-model="username" placeholder="m00000" required>
+        <label for="username">Brugernavn</label>
+        <input type="text" id="username" v-model="username" placeholder="test@yousee.dk" required>
       </div>
       <div class="form-group">
-        <label for="password">Adgangskode:</label>
+        <label for="password">Adgangskode</label>
         <input type="password" id="password" v-model="password" placeholder="**********" required>
       </div>
     
@@ -41,8 +58,6 @@ export default {
     </form>
   </div>
 </template>
-
-
 
 <style>
 </style>
