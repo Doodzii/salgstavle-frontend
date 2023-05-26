@@ -3,9 +3,19 @@
 import axios from "axios";
 import config from "../config";
 
+import { useUserStore } from "../stores/userData";
+
 export default {
   name: "login",
   
+  setup() {
+    const user = useUserStore();
+
+    return {
+      user
+    }
+  },
+
   data() {
     return {
       username: "",
@@ -16,19 +26,25 @@ export default {
   methods: {
     async login() {
 
+      this.user.login(this.username, this.password, this);
+
+      /*
       const response = await axios.post(config.backendUrl+"/login", {
         username: this.username,
         password: this.password
       })
 
+      console.log(response.data.session);
+
       if (response.data.success) {
         this.$toast.success(response.data.success);
+        this.$cookies.set("session", response.data.session, "10080")
       }
 
       if (response.data.error) {
         this.$toast.error(response.data.error);
-      }
-      
+      }*/
+
     }
   }
 
@@ -46,11 +62,11 @@ export default {
       <p>Hvis du ikke kender dine loginoplysninger, bedes du kontakte din leder for hjælp.</p>
       <div class="form-group">
         <label for="username">Brugernavn</label>
-        <input type="text" id="username" v-model="username" placeholder="test@yousee.dk" required>
+        <input type="text" autocomplete="username" v-model="username" placeholder="test@yousee.dk" required>
       </div>
       <div class="form-group">
         <label for="password">Adgangskode</label>
-        <input type="password" id="password" v-model="password" placeholder="**********" required>
+        <input type="password" autocomplete="current-password" v-model="password" placeholder="**********" required>
       </div>
     
       <button type="submit">Log ind</button>
