@@ -48,7 +48,8 @@ export default {
     <!-- 
       Application form
     -->
-    <div v-if="!sent" class="apply form-container">
+    <div class="flexbox">
+      <div v-if="!sent" class="apply form-container">
 
         <h1>🎯 Ansøgningsformular - Leder Adgang</h1>
 
@@ -61,7 +62,7 @@ export default {
                 <label for="username">Arbejdsmail</label>
                 <input type="email" id="email" v-model="email" placeholder="test@yousee.dk" required>
             </div>
- 
+
             <div class="form-group">
                 <label for="text">Udbyder</label>
                 <input type="text" id="provider" v-model="provider" placeholder="YouSee" required>
@@ -77,19 +78,20 @@ export default {
                 <textarea id="reason" name="reason" placeholder="Så jeg kan motivere mit team til at sælge nødpakker!" required></textarea>
             </div>
 
-  
+
             <button type="submit">Ansøg</button>
             <a style="margin-left: 10px;" href="/login">Gå til login</a>
         </form>
-    </div>
-    
-    <!--
-      Application sent. Check email inbox.
-    -->
-    <div v-if="sent" class="apply form-container">
-      <h1>Godkend din email</h1>
-      <p>Følg instruktionerne sendt til din mailadresse på <b>{{ email }}</b>.</p>
-      <a style="margin-left: 10px;" href="/login">Gå til login</a>
+        </div>
+
+        <!--
+        Application sent. Check email inbox.
+        -->
+        <div v-if="sent" class="apply form-container">
+        <h1>Godkend din email</h1>
+        <p>Følg instruktionerne sendt til din mailadresse på <b>{{ email }}</b>.</p>
+        <a style="margin-left: 10px;" href="/login">Gå til login</a>
+        </div>
     </div>
 
 </template>
