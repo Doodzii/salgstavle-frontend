@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Rubik', sans-serif;
-    background-color: #824E4B;
+    background-color: #6a3e3c;
     margin: 0;
     padding: 0;
     display: block;
@@ -37,3 +37,11 @@ input {
     margin: 0;
     padding: 0;
 }
+
+.non-selectable {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version */
+    pointer-events: none;
+  }

@@ -6,6 +6,7 @@ import router from "../router"
 import axios from "axios";
 import config from "../config";
 
+
 export const useUserStore = defineStore({
   id: "user",
 
@@ -64,7 +65,8 @@ export const useUserStore = defineStore({
 
     //Logout of current account
     logout() {
-      console.log("logout!");
+      $cookies.remove("session");
+      window.location.reload();
     }
 
   }
